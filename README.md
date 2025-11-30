@@ -1,60 +1,27 @@
 # Praktikum Modul 5 Jarkom
 
-Brush Stroke
-
-Brush Stroke
-
-Brush Stroke
-
-Brush Stroke
-
-Brush Stroke
-
-Brush Stroke
-
 ![](assets/J_qggbC655o6VfpeCyYJ3uTlWIpPBtgS_MkS-QdyKc8=.png)
 
-\# Jarkom-Modul-5-K56
+!\[Gambar,struktur subnet tree]\(\<u>images/Subnetting-Tree_Modul5_Jarkom.png\</u>)
 
+---
 
+---
 
+# Jarkom-Modul-5-K56
 
-\# LAPORAN PRAKTIKUM MODUL-5
+# LAPORAN PRAKTIKUM MODUL-5
 
+## Praktikum Komunikasi data & Jaringan Komputer kelompook K56
 
+| Nama                    | NRP        |
+| ----------------------- | ---------- |
+| Mochammad Atha Tajuddin | 5027241093 |
+| Muhammad Huda Rabbani   | 5027241098 |
 
-
-\## Praktikum Komunikasi data & Jaringan Komputer kelompook K56
-
-
-
-
-\| Nama | NRP |
-
-\| ----------------------- | ---------- |
-
-\| Mochammad Atha Tajuddin | 5027241093 |
-
-\| Muhammad Huda Rabbani | 5027241098 |
-
-
-
-
-\---
-
-
-
-
-!\[Gambar,struktur subnet tree]\(\<u>images/Subnetting-Tree\_Modul5\_Jarkom.png\</u>)
-
-
-
-
-***
+---
 
 # Konfigurasi & Scripting
-
-
 
 ### Osgiliath
 
@@ -123,11 +90,9 @@ ip route add 192.239.1.0/25 via 192.239.1.226
 
 ```
 
-Untuk konfigurasi router pada Osgiliath menggunakan prefix 192.168.x.x karena sifatnya mengikuti nameserver atau IP asli GNS3 nya alias KVM nya karena kegunaanya untuk ping ke daerah luar seperti 1.1.1.1,google.com, dll. 
+Untuk konfigurasi router pada Osgiliath menggunakan prefix 192.168.x.x karena sifatnya mengikuti nameserver atau IP asli GNS3 nya alias KVM nya karena kegunaanya untuk ping ke daerah luar seperti 1.1.1.1,google.com, dll.
 
-
-
-***
+---
 
 ### Moria
 
@@ -144,7 +109,7 @@ auto eth0
 iface eth0 inet static
     address 192.239.1.218
     netmask 255.255.255.252
-    gateway 192.239.1.217  
+    gateway 192.239.1.217
     # Gateway ini penting agar Moria bisa kirim paket ke internet/server lain via Osgiliath
 
 # --- ARAH SAMPING (LOCAL SERVER) ---
@@ -178,17 +143,9 @@ iptables -t nat -A PREROUTING -s 192.239.1.195 -d 192.239.1.186 -j DNAT --to-des
 # Sebenarnya Routing biasa sudah cukup karena Vilya dan IronHills beda subnet.
 ```
 
-
-
-***
-
-
-
-
+---
 
 ### IronHills
-
-
 
 ```
 auto lo
@@ -202,8 +159,6 @@ iface eth0 inet static
 
 up echo nameserver 192.168.122.1 > /etc/resolv.conf
 ```
-
-
 
 Setup firewall
 
@@ -224,8 +179,6 @@ iptables -A INPUT -p tcp --dport 80 -j DROP
 iptables -I INPUT -p tcp --dport 80 -m connlimit --connlimit-above 3 -j REJECT
 ```
 
-
-
 Setup web nya
 
 ```
@@ -244,9 +197,7 @@ echo "<h1>Welcome to IronHills</h1>" > /var/www/html/index.html
 # curl localhost
 ```
 
-***
-
-
+---
 
 ### Khamul
 
@@ -261,8 +212,6 @@ gateway 192.239.1.185
 up echo nameserver 192.168.122.1 > /etc/resolv.conf
 
 ```
-
-
 
 ### Rivendell (DHCP Relay)
 
@@ -286,8 +235,6 @@ iface eth1 inet static
     netmask 255.255.255.248
 
 ```
-
-
 
 Setup
 
@@ -313,8 +260,6 @@ Jika sudah selesai lakuakn restart
 service isc-dhcp-relay restart
 ```
 
-
-
 ### Vilya
 
 ```
@@ -330,8 +275,6 @@ iptables -F
 iptables -X
 ```
 
-
-
 Setup
 
 ```
@@ -340,7 +283,7 @@ apt install isc-dhcp-server -y
 
 nano /etc/dhcp/dhcpd.conf
 
-isi dengan : 
+isi dengan :
 
 # GLOBAL OPTION
 default-lease-time 600;
@@ -382,8 +325,6 @@ INTERFACESv4="eth0"
 INTERFACESv6=""
 ```
 
-
-
 Script firewall
 
 ```
@@ -400,54 +341,33 @@ iptables -A INPUT -p udp --dport 67 -j ACCEPT
 iptables -A INPUT -p udp --dport 68 -j ACCEPT
 ```
 
-
-
-Validasi : 
+Validasi :
 
 ![](assets/rlnq4_KUoJwQVyaU58UBmTnmMG2b1vT7PUnMjKH0oXg=.png)
-
-
 
 ![](assets/k1RfkLlnVw6REeBerNaqTBD24dpPFsB124qfQOVauU8=.png)
 
 ![](assets/HoFPEzrjy3kXRepTEJwNmzclHKMJ-QwkDKLuHXjYjog=.png)
 
-
-
 ![](assets/ajoHcEcUwALvdkbCTWvqgkyUAX9-NhgNTkujZH79pnw=.png)
 
-
-
 Terbukti bahwa client lain atau daerah lain tidak dapat melakukan ping pada node Vilya
-
-
 
 ![](assets/L59iImRWzRsk1UCMk-4flbXRajeoWvx12yaJjUtODLI=.png)
 
 Uji ping dari VIlya ke Wilderland
 
-
-
 ![](assets/9-KEuNPq8esncMhKz-JfuZGht0HZXaBMm_p0Z6Do4UI=.png)
 
 Uji ping dari Vilya ke IronHils
 
-
-
-
 ![](assets/SGxx3V8iSAVEmkDEpTAMcMr0g6vibCrgsdUkLC1nwd0=.png)
-
-
 
 ![](assets/MqrlNNYoPji2jwnoKBgF9MLnvxStV95pVvEIKp637F8=.png)
 
 Selain Vilya tidak akan dapat ping ke Narya
 
-
-
 ### Narya
-
-
 
 ```
 auto eth0
@@ -460,8 +380,6 @@ iface eth0 inet static
 up echo nameserver 192.168.122.1 > /etc/resolv.conf
 ```
 
-
-
 Setup
 
 ```
@@ -471,7 +389,7 @@ ln -s /etc/init.d/named /etc/init.d/bind9
 
 nano /etc/bind/named.conf.options
 
-isi dengan berikut : 
+isi dengan berikut :
 
 options {
     directory "/var/cache/bind";
@@ -484,11 +402,11 @@ options {
 
     dnssec-validation no;
     listen-on-v6 { any; };
-    allow-query { any; };   
+    allow-query { any; };
 };
 
 
-Untuk dapat resolve ns1.k56.narya.com maka butuh edit pada named.conf.local 
+Untuk dapat resolve ns1.k56.narya.com maka butuh edit pada named.conf.local
 
 nano /etc/bind/named.conf.local
 
@@ -497,7 +415,7 @@ zone "ns1.k56.narya.com" {
     file "/etc/bind/db.k56";
 };
 
-Setelah itu 
+Setelah itu
 
 nano /etc/bind/db.k56
 
@@ -522,9 +440,7 @@ vilya   IN      A       192.239.1.195       ; vilya -> IP Vilya
 palantir IN     A       192.239.1.202       ; Web Server Palantir (Contoh)
 ```
 
-
-
-Firewall script 
+Firewall script
 
 ```
 # 1. Izinkan Vilya (192.239.1.195) mengakses port 53 (TCP & UDP)
@@ -536,11 +452,6 @@ iptables -A INPUT -p tcp --dport 53 -j DROP
 iptables -A INPUT -p udp --dport 53 -j DROP
 ```
 
-
-
-
-
-
 ![](assets/rB0SQXQ5AMTwefzAIE4S__NdC-C9sG2YtxfUJFXqt5w=.png)
 
 ![](assets/CAg6nd8MuMVxKhmuml2vQ2kjn6vrpZttWp630jSWn5o=.png)
@@ -551,17 +462,9 @@ Berhasil,Vilya dapat melakukan netcat atau nc pada node Narya
 
 Sedangkan Rivendell akan timeout
 
-
-
-***
-
-
+---
 
 ### Minastir
-
-
-
-
 
 Konfigurasinya
 
@@ -604,8 +507,7 @@ ip route add 192.239.1.236/30 via 192.239.1.234
 
 ```
 
-
-Setup DHCP Relay 
+Setup DHCP Relay
 
 ```
 apt update
@@ -619,14 +521,7 @@ INTERFACES="eth0 eth1 eth2"
 OPTIONS=""
 ```
 
-
-
-
-
-
-***
-
-
+---
 
 ### Pelargir
 
@@ -659,19 +554,9 @@ iface eth2 inet static
 up ip route add 192.239.1.0/25 via 192.239.1.238
 ```
 
-
-
-
-
-
-
-***
-
-
+---
 
 ### Palantir (Web server)
-
-
 
 ```
 auto eth0
@@ -682,8 +567,6 @@ iface eth0 inet static
 up echo nameserver 192.168.122.1 > /etc/resolv.conf
     dns-nameservers 192.239.1.194  # IP Narya
 ```
-
-
 
 Setup firewall
 
@@ -734,13 +617,7 @@ iptables -A LOG_DROP -m recent --name PORT_SCAN_DETECTED --set
 iptables -A LOG_DROP -j DROP
 ```
 
-
-
-***
-
-
-
-
+---
 
 ### Elendil,Isildur,Cirdan, dan Gilgalad
 
@@ -751,13 +628,9 @@ iface eth0 inet dhcp
 up echo nameserver 192.168.122.1 > /etc/resolv.conf
 ```
 
-
-
-***
+---
 
 ### Others (Pengujian)
-
-
 
 ```
 apt install apache2-utils
@@ -765,17 +638,10 @@ apt install apache2-utils
 ab -n 100 -c 10 http://192.239.1.210/
 ```
 
-
-
 ![](assets/1JCIB8gTynkxjDN8tZIfft9Azox7Xeo0E9a9qM8u6P0=.png)
 
 Uji IronHills dari client lain
 
-
-
 ![](assets/xzRCp4ifoUcsBrj-8RrNEelRE4147S8Ye5ThpVVPQtw=.png)
 
 Uji curl Palantir dari node Minastir
-
-
-
